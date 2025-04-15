@@ -13,7 +13,8 @@ sudo apt install -y dialog mtools acpi acpid gvfs-backends
 sudo systemctl enable avahi-daemon
 sudo systemctl enable acpid
 sudo apt install -y alsa-utils volumeicon-alsa
-sudo apt install -y cups bluez blueman
+sudo apt install -y cups bluez blueman system-config-printer simple-scan
+sudo systemctl enable cups.service
 sudo apt install -y exa
 sudo systemctl enable bluetooth
 sudo systemctl enable cups
