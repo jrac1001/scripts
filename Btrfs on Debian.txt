@@ -81,5 +81,59 @@ To manually generate grub snapshot entries you can run
  running the following command:
       On Debian and Ubuntu based distributions "update-grub" is a script that runs 
       grub-mkconfig ...
-      
-      
+ 
+to backup existing keyboard shortcuts for window manager and apps run:      
+ 
+ xfconf-query -c xfce4-keyboard-shortcuts -l -v > xfce4-keyboard-shortcuts-backup.txt     
+ 
+save that file to, for example, Ventoy. Then to install them to your new distro:
+
+#!/bin/bash
+while read line; do
+    xfconf-query -c xfce4-keyboard-shortcuts -p "$(echo $line | awk '{print $1}')" -s "$(echo $line | awk '{print $2}')" -n
+done < xfce4-keyboard-shortcuts-backup.txt
+
+This script reads each line from the backup file and uses xfconf-query to restore 
+the shortcuts.
+
+Make sure to run these commands with appropriate permissions, and ensure that 
+xfconfd is not running to avoid overwriting your changes. You can stop xfconfd 
+temporarily by running:
+
+killall xfconfd
+
+After restoring the shortcuts, you can restart xfconfd to apply the changes:
+
+xfconfd &
+
+To manually back up your panel settings, you can copy the configuration files located at 
+~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml 
+and ~/.config/xfce4/panel.
+For restoring the settings, you can replace these files with the backed-up copies.
+
+sudo sed -i 's/bookworm/sid/g' /etc/apt/sources.list
+sudo nano /etc/apt/sources.list
+comment out or delete unwanted lines
+should look like this:
+	deb http://deb.debian.org/debian sid main  non-free-firmware contrib non-free
+	deb http://ftp.us.debian.org/debian sid main contrib non-free
+sudo apt-get update
+sudo apt-get dist-upgrade
+If you are planning on running sid, install the apt-listbugs package. This will check 
+the packages being installed/updated against the bug tracker and let you know of any potential problems.
+
+logout			sudo service lightdm restart
+reboot			sudo xfce4-session-logout --reboot
+xfce4-terminal --dropdown
+volumn up		amixer -D pulse set Master 5%+
+volumn down		amixer -D pulse set Master 5%-
+window menu		xfdesktop --windowlist
+sudo visudo		$USER ALL=(ALL) NOPASSWD:ALL
+redshift -l 30.84:-89.54 -t 5700:3500 -g 0.8 -m randr -v
+xprop | grep WM_CLASS
+devilspie2
+sudo apt install apt-listbugs apt-listchanges
+COPY:
+~/.congig/conky/
+.../autostart/
+.../devilspie/
