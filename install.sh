@@ -11,7 +11,7 @@ sudo systemctl enable acpid
 sudo apt install -y alsa-utils volumeicon-alsa
 sudo apt install -y lightdm-gtk-greeter-settings
 sudo systemctl enable lightdm
-sudo apt install -y build-essential pipx curl wget
+sudo apt install -y build-essential uv curl wget
 sudo apt install -y micro nala ffmpeg zoxide fzf bat ranger git ncdu vnstat btop mpv foliate
 curl -fsS https://dl.brave.com/install.sh | sh
 wget https://github.com/fastfetch-cli/fastfetch/releases/download/v2.43.0/fastfetch-linux-amd64.deb
@@ -26,12 +26,15 @@ sudo apt update
 sudo apt install -y eza
 sudo apt install gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub org.wezfurlong.wezterm
+# flatpak install flathub org.wezfurlong.wezterm
 sudo apt install -y cups bluez blueman system-config-printer simple-scan
 sudo systemctl enable cups.service
 sudo systemctl enable bluetooth
 sudo systemctl enable cups
-sudo apt install -y hplip hplip-gui
-sudo apt install -y printer-driver-hpcups
-sudo apt install -y geany vlc yt-dlp ripgrep xpad 
-sudo apt install -y xfce4-panel-profiles 
+sudo apt install -y hplip hplip-gui conky-all
+sudo apt install -y printer-driver-hpcups retext
+sudo apt install -y geany geany-plugins vlc yt-dlp ripgrep xpad timeshift
+sudo apt install -y xfce4-panel-profiles xfconf-query devilspie2
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --git https://gitlab.torproject.org/tpo/core/oniux --tag v0.4.0 oniux
+
